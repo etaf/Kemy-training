@@ -1,0 +1,74 @@
+package KemyBuffers;
+
+message WhiskerTree {
+  optional MemoryRange domain = 1;
+
+  repeated WhiskerTree children = 2;
+
+  optional Whisker leaf = 3;
+
+  optional ConfigRange config = 4;
+
+  optional OptimizationSettings optimizer = 5;
+}
+
+message MemoryRange {
+  optional Memory lower = 11;
+  optional Memory upper = 12;
+}
+
+message Memory {
+  optional double ewma_qlen = 21;
+  optional double ewma_inter_rec = 22;
+}
+
+message Whisker {
+  optional sint32 window_increment = 31;
+  optional double window_multiple = 32;
+
+  optional MemoryRange domain = 34;
+}
+
+message OptimizationSetting {
+  optional double min_value = 41;
+  optional double max_value = 42;
+
+  optional double min_change = 43;
+  optional double max_change = 44;
+
+  optional double multiplier = 45;
+
+  optional double default_value = 46;
+}
+
+message OptimizationSettings {
+  optional OptimizationSetting window_increment = 51;
+  optional OptimizationSetting window_multiple = 52;
+}
+
+message Range {
+  optional double low = 61;
+  optional double high = 62;
+}
+
+message ConfigRange {
+  optional Range link_packets_per_ms = 71;
+  optional Range rtt = 72;
+  optional Range num_senders = 73;
+
+  optional double mean_off_duration = 81;
+  optional double mean_on_duration = 82;
+
+  optional Range forward_ppms = 83;
+  optional Range inter_send_time =  84;
+}
+
+message NetConfig {
+  optional double mean_on_duration = 1;
+  optional double mean_off_duration = 2;
+  optional uint32 num_senders = 3;
+  optional double link_ppt = 4;
+  optional double delay = 5;
+  optional double forward_ppms = 6;
+  optional double inter_send_time = 7;
+}
